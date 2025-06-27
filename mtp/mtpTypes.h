@@ -1,9 +1,10 @@
 #ifndef MTPTYPES_H
 #define MTPTYPES_H
+
 #include <cstdint>
+#include <vector>
 
 namespace mtp {
-
     //This identifies the operation being initiated by the device
     using MtpOperationCode = std::uint16_t;
 
@@ -40,7 +41,26 @@ namespace mtp {
     //object handles are unique across all storage but only within a single session, object handles cannot be reused after an object is deleted
     using MtpObjectHandle = uint32_t;
 
+    class MtpStorage; //forward deceleration
+    using MtpStorageList = std::vector<MtpStorage*>;
 
+    class MtpDevice; //forward deceleration
+    using MtpDeviceList = std::vector<MtpDevice*>;
+
+    class MtpProperty; //forward deceleration
+    using MtpPropertyList = std::vector<MtpProperty*>;
+
+    using MtpObjectPropertyList = std::vector<std::uint16_t>;
+    using MtpObjectDeviceList = std::vector<std::uint16_t>;
+    using MtpObjectFormatList = std::vector<std::uint16_t>;
+    using MtpObjectHandleList = std::vector<std::uint32_t>;
+    using MtpObjectPropertyList = std::vector<std::uint16_t>;
+    using MtpStorageIDList = std::vector<std::uint32_t>;
+
+    enum class UrbPacketDivisionMode {
+        FIRST_PACKET_ONLY_HEADER, //First packet only contains a header
+        FIRST_PACKET_HAS_PAYLOAD, //First packet contains payload much as possible
+    };
 
 }
 
