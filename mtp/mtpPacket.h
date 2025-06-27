@@ -1,6 +1,7 @@
 #ifndef MTPPACKET_H
 #define MTPPACKET_H
 #include <cstddef>
+#include <cstdint>
 
 namespace mtp {
     class MtpPacket {
@@ -12,6 +13,10 @@ namespace mtp {
         void allocate(std::size_t length);
         void dump();
         void copyFrom(const MtpPacket& source);
+
+        std::uint16_t getContainerCode() const;
+        void setContainerCode(std::uint16_t code);
+
 
 
 
