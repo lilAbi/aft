@@ -62,6 +62,19 @@ namespace mtp {
         FIRST_PACKET_HAS_PAYLOAD, //First packet contains payload much as possible
     };
 
+    struct MtpFileRange {
+        int fd;
+        std::size_t offset;
+        std::uint16_t commmand;
+        std::uint32_t transactionID;
+        std::int64_t length;
+    };
+
+    struct MtpEvent {
+        std::size_t length;
+        void* data;
+    };
+
 }
 
 #endif //MTPTYPES_H
