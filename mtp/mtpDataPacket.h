@@ -82,8 +82,33 @@ namespace mtp {
         void setInt128Arr(std::vector<__int128_t>* vecPtr);
         void setUInt128rr(const unsigned __int128_t* values, int count);
         void setUInt128Arr(std::vector<unsigned __int128_t>* vecPtr);
+        void setEmptyArray() { setUInt8(0); }
 
+        void setString(std::string stringBuffer);
+        void setString(const std::uint16_t stringBuffer);
+        void setEmptyString() { setUInt32(0); }
 
+        int read(IMtpHandle* handle); //fill the buffer with data from the usb handle
+        int write(IMtpHandle* handle); //write data to the usb handle
+        int writeData(IMtpHandle* handle, void* data, std::uint32_t length);
+
+        int read(struct usb_request* request);
+        int readData(struct usb_request* request, void* buffer, int length);
+        int readDataAsync(struct usb_request* request);
+        int readDataWait(struct usb_device* device);
+        int readDataHeader(struct usb_request* endpoint);
+
+        //Write a whole data packet with payload to the end point given by a request. Return the number of bytes (including header size) sent to the device on success. Otherwise -1.
+        int write(struct usb_request* request, UrbPacketDivisionMode divisionMode);
+        //Similar to previous write method but it reads the payload from |fd|. If |size| is larger than MTP_BUFFER_SIZE, the data will be sent by multiple bulk transfer requests.
+        std::int64_t write(struct usb_struct* request, UrbPacketDivisionMode divisionMode, int fd, std::size_t size);
+
+        inline bool hasData() const { return packetSize > MTP_CONTAINER_HEADER_SIZE; }
+        inline std::uint32_t getContainerLength() const { return MtpPacket::getUInt32(MTP_CONTAINER_LENGTH_OFFSET); }
+        void* getData(int* outLength) const;
+
+    private:
+        std::size_t offset;
     };
 
 }
