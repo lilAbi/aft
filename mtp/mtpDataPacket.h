@@ -31,8 +31,8 @@ namespace mtp {
         bool                getInt32(std::int32_t& value) { return getUInt32(reinterpret_cast<std::uint32_t&>(value)); }
         bool                getUInt64(std::uint64_t& value);
         bool                getInt64(std::int64_t& value) { return getUInt64(reinterpret_cast<std::uint64_t&>(value)); }
-        bool                getUInt128(unsigned __int128_t& value); //does not work in 32 bit OS
-        bool                getInt128(__int128& value) { return getUInt128(reinterpret_cast<unsigned __int128_t&>(value)); }
+        bool                getUInt128(__uint128_t& value); //does not work in 32 bit OS
+        bool                getInt128(__int128& value) { return getUInt128(reinterpret_cast<__uint128_t&>(value)); }
 
         bool                getString(std::string& buffer);
 
@@ -45,7 +45,7 @@ namespace mtp {
         std::vector<std::int64_t>*          getInt64Arr();
         std::vector<std::uint64_t>*         getUInt64Arr();
         std::vector<__int128_t>*            getInt128Arr();
-        std::vector<unsigned __int128_t>*   getUInt128Arr();
+        std::vector<__uint128_t>*   getUInt128Arr();
 
         //todo: see if template is possible
         void setInt8(const std::int8_t& value);
@@ -57,7 +57,7 @@ namespace mtp {
         void setInt64(const std::int64_t& value);
         void setUInt64(const std::uint64_t& value);
         void setInt128(const __int128_t& value);
-        void setUInt128(const unsigned __int128_t& value);
+        void setUInt128(const __uint128_t& value);
         void setInt128(const std::int64_t value);
         void setUInt128(const std::uint8_t value);
 
@@ -80,8 +80,8 @@ namespace mtp {
         void setUInt64Arr(std::vector<std::uint64_t>* vecPtr);
         void setInt128Arr(const __int128_t* values, int count);
         void setInt128Arr(std::vector<__int128_t>* vecPtr);
-        void setUInt128rr(const unsigned __int128_t* values, int count);
-        void setUInt128Arr(std::vector<unsigned __int128_t>* vecPtr);
+        void setUInt128rr(const __uint128_t* values, int count);
+        void setUInt128Arr(std::vector<__uint128_t>* vecPtr);
         void setEmptyArray() { setUInt8(0); }
 
         void setString(std::string stringBuffer);

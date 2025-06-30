@@ -55,6 +55,7 @@ namespace mtp {
     using MtpObjectFormatList = std::vector<std::uint16_t>;
     using MtpObjectHandleList = std::vector<std::uint32_t>;
     using MtpObjectPropertyList = std::vector<std::uint16_t>;
+    using MtpDevicePropertyList = std::vector<std::uint16_t>;
     using MtpStorageIDList = std::vector<std::uint32_t>;
 
     enum class UrbPacketDivisionMode {
@@ -65,7 +66,7 @@ namespace mtp {
     struct MtpFileRange {
         int fd;
         std::size_t offset;
-        std::uint16_t commmand;
+        std::uint16_t command;
         std::uint32_t transactionID;
         std::int64_t length;
     };
