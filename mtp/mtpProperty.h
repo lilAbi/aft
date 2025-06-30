@@ -3,8 +3,10 @@
 
 #include <cstdint>
 
-#include "mtpTypes.h.h"
+#include "mtpTypes.h"
 #include <string>
+
+#include "mtpTypes.h"
 
 namespace mtp {
     class MtpDataPacket;
@@ -29,6 +31,66 @@ namespace mtp {
     };
 
     class MtpProperty {
+    public:
+        MtpProperty() = default;
+        MtpProperty(MtpPropertyCode propCode, MtpDataType type, bool writeable = false, int defaultValue = 0);
+        virtual ~MtpProperty() = default;
+
+        MtpPropertyCode getPropertyCode() const { return code; }
+        MtpDataType getDataType() const { return type; }
+
+        bool read(MtpDataPacket& packet);
+        bool write(MtpDataPacket& packet);
+
+        void setDefaultValue(const std::uint16_t* str);
+        void setCurrentValue(const std::uint16_t* str);
+        void setCurrentValue(const char* str);
+        void setCurrentValue(MtpDataPacket& packet);
+        const MtpPropertyValue& getCurrentValue() { return currentValue; }
+
+        void setFormRange(int min, int max, int step);
+        void setFormEnum(const int* value, int count);
+        void setFormDateTime();
+
+        void print();
+
+        inline bool isDeviceProperty() const {
+            return( ( (code & 0xF000) == 0x5000) || ((code & 0xF800) == 0xD000) );
+        }
+
+    private:
+        bool readValue(MtpDataPacket& packet, MtpPropertyValue& value);
+        void writeValue(MtpDataPacket& packet, MtpPropertyValue& value);
+        MtpPropertyValue* readArrayValues(MtpDataPacket& packet, std::uint32_t length);
+        void readArrayValues(MtpDataPacket& packet, std::uint32_t length, MtpPropertyValue* values);
+
+        void print(MtpPropertyValue& value);
+
+    public:
+        MtpPropertyCode code;
+        MtpDataType type;
+        bool writeable;
+        MtpPropertyValue defaultValue;
+        MtpPropertyValue currentValue;
+
+        std::uint32_t defaultArrayLength;
+        MtpPropertyValue* defaultArrayValues;
+        std::uint32_t currentArrayLength;
+        MtpPropertyValue* currentArrayValues;
+
+        enum class Form {NONE = 0, RANGE, ENUM, FORM_DATE_TIME};
+
+        std::uint32_t groupCode;
+        std::uint8_t formFlag;
+
+        //for range form
+        MtpPropertyValue minimumValue;
+        MtpPropertyValue maximumValue;
+        MtpPropertyValue stepSize;
+
+        //for enum form
+        std::uint16_t enumLength;
+        MtpPropertyValue* enumValues;
 
     };
 }
