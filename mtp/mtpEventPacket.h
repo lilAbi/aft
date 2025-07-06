@@ -7,22 +7,19 @@
 namespace mtp {
     class IMtpHandle;
 
-    namespace mtp {
-        class MtpEventPacket : public MtpPacket {
-        public:
-            MtpEventPacket() = default;
-            ~MtpEventPacket() override = default;
+    class MtpEventPacket : public MtpPacket {
+    public:
+        MtpEventPacket();
+        ~MtpEventPacket() override = default;
 
-            int write(IMtpHandle* handle);
+        int write(IMtpHandle* handle);
 
-            int sendRequest(struct usb_request* request);
-            int readResponse(struct usb_device* device);
+        int sendRequest(struct usb_request* request);
+        int readResponse(struct usb_device* device);
 
-            inline MtpEventCode getEventCode() const { return getContainerCode(); }
-            inline void setEventCode(const MtpEventCode code) { return setContainerCode(code); }
-        };
-
-    }
+        inline MtpEventCode getEventCode() const { return getContainerCode(); }
+        inline void setEventCode(const MtpEventCode code) { return setContainerCode(code); }
+    };
 
 }
 

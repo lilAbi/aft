@@ -1,2 +1,4 @@
 .idea
 cmake-build-release-gcc
+bindings
+CMakeUserPresets.json

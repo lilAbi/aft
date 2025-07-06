@@ -16,7 +16,7 @@ namespace mtp {
         virtual ~IMtpDatabase() = default;
 
         //Called from SendObjectInfo to reserve a database entry for the incoming file.
-        virtual MtpObjectHandle beginSendObject(const char* path, MtpObjectFormat format, MtpObjectHandle parent, MtpStorageID storage) = 0;
+        virtual MtpObjectHandle beginSendObject(const char* path, MtpObjectFormat format, MtpObjectHandle parent, MtpStorageID storageID) = 0;
         //Called to report success or failure of the SendObject file transfer.
         virtual void endSendObject(MtpObjectHandle handle, bool sent) = 0;
         //Called to rescan a file, such as after an edit.
