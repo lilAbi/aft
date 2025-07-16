@@ -3,6 +3,9 @@
 
 #include <cstdint>
 
+constexpr std::uint32_t MTP_PARENT_ROOT          = 0xFFFFFFFF;
+constexpr std::uint32_t INVALID_OBJECT_HANDLE    = 0xFFFFFFFF;
+
 //Container Types
 constexpr std::uint16_t MTP_CONTAINER_TYPE_UNDEFINED    = 0x0000;
 constexpr std::uint16_t MTP_CONTAINER_TYPE_COMMAND      = 0x0001;
@@ -419,7 +422,7 @@ constexpr std::uint16_t MTP_RESPONSE_OPERATION_NOT_SUPPORTED = 0x2005;
 constexpr std::uint16_t MTP_RESPONSE_PARAMETER_NOT_SUPPORTED = 0x2006;
 constexpr std::uint16_t MTP_RESPONSE_INCOMPLETE_TRANSFER = 0x2007;
 constexpr std::uint16_t MTP_RESPONSE_INVALID_STORAGEID = 0x2008;
-constexpr std::uint16_t MTP_RESPONSE_INVALID_OBJECTHANDLE = 0x2009;
+constexpr std::uint16_t MTP_RESPONSE_INVALID_OBJECT_HANDLE = 0x2009;
 constexpr std::uint16_t MTP_RESPONSE_DEVICEPROP_NOT_SUPPORTED = 0x200A;
 constexpr std::uint16_t MTP_RESPONSE_INVALID_OBJECTFORMATCODE = 0x200B;
 constexpr std::uint16_t MTP_RESPONSE_STORE_FULL = 0x200C;

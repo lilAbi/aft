@@ -4,6 +4,7 @@
 #include "iMtpDatabase.h"
 #include "mtpStorage.h"
 #include "mtpObjectInfo.h"
+#include "mtp.h"
 
 #include <map>
 
@@ -33,9 +34,9 @@ namespace mtp {
         //Called to rescan a file, such as after an edit
         void rescanFile(const char *path, MtpObjectFormat format, MtpObjectHandle handle) override;
 
-        MtpObjectHandleList* getObjectList(MtpStorageID storage, MtpObjectFormat format, MtpObjectHandle parent) override;
+        MtpObjectHandleList* getObjectList(MtpStorageID storageID, MtpObjectFormat format, MtpObjectHandle parent) override;
 
-        int getNumObjects(MtpStorageID storage, MtpObjectFormat format, MtpObjectHandle parent) override;
+        int getNumObjects(MtpStorageID storageID, MtpObjectFormat format, MtpObjectHandle parent) override;
 
         //callee should delete[] the results from these- results can be NULL
         MtpObjectFormatList* getSupportedPlaybackFormats() override;

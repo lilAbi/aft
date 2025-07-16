@@ -22,8 +22,8 @@ namespace mtp {
         //Called to rescan a file, such as after an edit.
         virtual void rescanFile(const char* path, MtpObjectFormat format, MtpObjectHandle handle) = 0;
         //Get list of files
-        virtual MtpObjectHandleList* getObjectList(MtpStorageID storage, MtpObjectFormat format, MtpObjectHandle parent) = 0;
-        virtual int getNumObjects(MtpStorageID storage, MtpObjectFormat format, MtpObjectHandle parent) = 0;
+        virtual MtpObjectHandleList* getObjectList(MtpStorageID storageID, MtpObjectFormat format, MtpObjectHandle parent) = 0;
+        virtual int getNumObjects(MtpStorageID storageID, MtpObjectFormat format, MtpObjectHandle parent) = 0;
 
         virtual MtpObjectFormatList* getSupportedPlaybackFormats() = 0;
         virtual MtpObjectFormatList* getSupportedCaptureFormats() = 0;
@@ -58,9 +58,9 @@ namespace mtp {
 
         virtual MtpProperty* getDevicePropertyDesc(MtpDeviceProperty property) = 0;
 
-        virtual MtpResponseCode beginMoveObject(MtpObjectHandle handle, MtpObjectHandle newParent, MtpStorageID storage) = 0;
+        virtual MtpResponseCode beginMoveObject(MtpObjectHandle handle, MtpObjectHandle newParent, MtpStorageID storageID) = 0;
 
-        virtual void endMoveObject(MtpObjectHandle oldParent, MtpObjectHandle newParent, MtpStorageID oldStorage, MtpStorageID newStorage, MtpObjectHandle handle, bool moved) = 0;
+        virtual void endMoveObject(MtpObjectHandle oldParent, MtpObjectHandle newParent, MtpStorageID oldStorageID, MtpStorageID newStorageID, MtpObjectHandle handle, bool moved) = 0;
 
         virtual MtpResponseCode beginCopyObject(MtpObjectHandle handle, MtpObjectHandle newParent, MtpStorageID newStorage) = 0;
 

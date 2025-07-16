@@ -1,6 +1,7 @@
 #ifndef MTPOBJECTINFO_H
 #define MTPOBJECTINFO_H
 #include <ctime>
+#include <string>
 
 #include "mtpTypes.h"
 
@@ -31,10 +32,10 @@ namespace mtp {
         std::uint16_t   associationType;
         std::uint32_t   associationDescription;
         std::uint32_t   sequenceNumber;
-        char*           name;
+        std::string     name;
         std::time_t     dateCreated;
         std::time_t     dateModified;
-        char*           keywords;
+        std::string     keywords;
     };
 }
 
